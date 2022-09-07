@@ -74,7 +74,8 @@
     <q-dialog   v-model="baseSetting.showFormDialog" persistent  style="z-index: 999!important;">
       <q-card style="max-width: 700px">
         <q-bar class="q-pa-md bg-blue-grey-9 text-white" style="height: 50px">
-          <div class="text-h4 " >Yeni Etkinlik Oluştur</div>
+          <div class="text-h4 " v-if="!formFields.id" >Yeni Etkinlik Oluştur</div>
+          <div class="text-h4 " v-else> Etkinlik Düzenle</div>
           <q-space />
           <q-btn dense flat icon="close" v-close-popup>
             <q-tooltip>Kapat</q-tooltip>
@@ -100,31 +101,6 @@
         />
       </div>
       <div class="col-6 q-pa-xs">
-        <div class="text-subtitle2 text-grey-8"> Mekan seçiniz </div>
-        <q-select
-          outlined
-          dense
-          v-model="formFields.restaurant_id"
-          :options="restaurants"
-          :option-label="items => items.PlaceName"
-          :option-value="items => items.id"
-        />
-      </div>
-
-      <div class="col-6 q-pa-xs">
-        <div class="text-subtitle2 text-grey-8">Açıklma </div>
-        <q-input
-          type="textarea"
-          outlined
-          dense
-          autogrow
-          v-model="formFields.EventDescription"
-          placeholder="Açıklama..."
-          hide-bottom-space
-        />
-      </div>
-
-      <div class="col-6 q-pa-xs">
         <div class="text-subtitle2 text-grey-8"> Banner  </div>
         <q-file
           outlined
@@ -138,6 +114,31 @@
           </template>
         </q-file>
       </div>
+<!--      <div class="col-6 q-pa-xs">-->
+<!--        <div class="text-subtitle2 text-grey-8"> Mekan seçiniz </div>-->
+<!--        <q-input-->
+<!--          outlined-->
+<!--          dense-->
+<!--          v-model="formFields.restaurant_id = store.getters['RestaurantsModule/elById'](JSON.parse())"-->
+<!--          hide-bottom-space-->
+<!--          autogrow-->
+<!--        />-->
+<!--      </div>-->
+
+      <div class="col-12 q-pa-xs">
+        <div class="text-subtitle2 text-grey-8">Açıklma </div>
+        <q-input
+          type="textarea"
+          outlined
+          dense
+          autogrow
+          v-model="formFields.EventDescription"
+          placeholder="Açıklama..."
+          hide-bottom-space
+        />
+      </div>
+
+
 
       <div class="col-4 q-pa-xs text-center">
         <div class="text-subtitle2 text-grey-8">Başlama Tarihi ve Saati</div>
@@ -315,7 +316,7 @@ export default {
         id: '',
         EventName: '',
         EventDescription: '',
-        restaurant_id: '',
+        restaurant_id:  '',
         Status: true,
         Banner: '',
         StartDateTime: '',
@@ -339,7 +340,7 @@ export default {
       let formData = new  FormData()
       formData.append('EventName',this.formFields.EventName)
       formData.append('EventDescription',this.formFields.EventDescription)
-      formData.append('restaurant_id',this.formFields.restaurant_id.id)
+      formData.append('restaurant_id',JSON.parse(localStorage.getItem('restUserDetail')).restaurant_id)
       formData.append('Status',this.formFields.Status)
       formData.append('Banner',this.formFields.Banner)
       formData.append('customer_id',JSON.stringify(this.modelCustomers))
@@ -396,10 +397,11 @@ export default {
     onReset(){
      this.formFields = { }
     },
-    addCustomer(id){
+    addCustomer(eventId){
       this.baseSetting.showCustomerDialog = true
-      this.formFields.id = +id
-      this.modelCustomers =  JSON.parse(JSON.stringify(this.$store.getters['EventsModule/registeredCustomersById'](id))).map( el => +el.customer_id)
+      this.formFields.id = +eventId
+      this.modelCustomers =  this.$store.getters['EventsModule/registeredCustomersById'](eventId)
+    //  this.modelCustomers =  JSON.parse(JSON.stringify(this.$store.getters['EventsModule/registeredCustomersById'](id))).map( el => +el.customer_id)
 
      },
     onCustomerSubmit(){
@@ -423,9 +425,7 @@ export default {
     this.$store.dispatch('CustomersModule/get')
   },
   computed : {
-    restaurants(){
-      return this.$store.getters['RestaurantsModule/restaurants']
-    },
+
     events(){
       return this.$store.getters['EventsModule/events']
     },

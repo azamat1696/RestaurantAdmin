@@ -85,8 +85,8 @@ const getters = {
   restaurants: (state) => {
     return state.restaurants
   },
-  elById: (state) => (id) => {
-    return state.restaurants.find(el => +el.id === +id)
+  elById: (state) => (rest_id) => {
+    return state.restaurants.find(el => +el.id === +rest_id.restaurant_id)
   }
 }
 

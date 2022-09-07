@@ -112,8 +112,8 @@ const getters = {
   registeredCustomers: (state) => {
     return state.selectedCustomers
   },
-  registeredCustomersById: (state) => (id) => {
-    return state.selectedCustomers.filter( el => +el.event_id === +id  )
+  registeredCustomersById: (state) => (eventId) => {
+    return state.selectedCustomers.filter( el => +el.id === +eventId  ).map( el => +el.customer_id)
   }
 }
 

@@ -9,7 +9,7 @@
       :pagination="pagination"
     >
       <template v-slot:top-right>
-        <q-input outlined dense debounce="300" color="primary" v-model="baseSetting.filter"  placeholder="Restoran Arayınız..."  >
+        <q-input outlined dense debounce="300" color="primary" v-model="baseSetting.filter"  placeholder="Kullanıcı Arayınız..."  >
           <template v-slot:append>
             <q-icon name="search" />
           </template>
@@ -19,7 +19,7 @@
           label="Yeni Kayıt "
           icon="add"
           class="q-mr-xs q-ml-xs q-pa-sm q-pr-md"
-          @click="baseSetting.showFormDialog = true"
+           disable
           ref="showFormDialog"
           id="showFormDialog"
         />
@@ -52,7 +52,7 @@
           <q-td class="text-center">
             <q-btn flat round color="blue-grey-9"  @click="onEdit(props.row.id)" ><i class="fas fa-edit"></i></q-btn>
 
-            <q-btn flat round color="primary"  @click="onDelete(props.row.id)" ><i class="fas fa-trash-alt"></i></q-btn>
+            <q-btn flat round color="primary" disable ><i class="fas fa-trash-alt"></i></q-btn>
           </q-td>
         </q-tr>
 
@@ -63,7 +63,8 @@
     <q-dialog   v-model="baseSetting.showFormDialog" persistent  style="z-index: 999!important;">
       <q-card style="max-width: 700px">
         <q-bar class="q-pa-md bg-blue-grey-9 text-white" style="height: 50px">
-          <div class="text-h4 " >Yeni Kullanıcı Oluştur</div>
+          <div class="text-h4 " v-if="!formFields.id" >Yeni Kullanıcı Oluştur</div>
+          <div class="text-h4 " v-else>  Kullanıcı Düzenle</div>
           <q-space />
           <q-btn dense flat icon="close" v-close-popup>
             <q-tooltip>Kapat</q-tooltip>
@@ -100,6 +101,7 @@
               :option-label="(items) => items.PlaceName"
               :option-value="(items) => items.id"
               clearable
+              disable
             />
           </div>
 

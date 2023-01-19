@@ -27,6 +27,7 @@ const routes = [
       { path: 'events', name: 'events', component: () => import('pages/Events/Events.vue') },
       { path: 'customers', name: 'Customers', component: () => import('pages/Customers/Customers.vue') },
       { path: 'users', name: 'Users', component: () => import('pages/RestaurantUsers/RestaurantUser.vue') },
+      { path: 'reservations', name: 'Reservations', component: () => import('pages/Reservations/Reservations.vue') },
 
     ]
 

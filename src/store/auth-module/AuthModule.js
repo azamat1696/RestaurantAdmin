@@ -63,7 +63,7 @@ const actions = {
        console.log(er)
      })
    },
-  initAuth({commit,dispach}){
+  initAuth({commit}){
   let token = localStorage.getItem('restaurantPanelAuthToken');
   if(token)
   {

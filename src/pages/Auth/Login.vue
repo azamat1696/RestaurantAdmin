@@ -74,7 +74,7 @@ export default {
       formData.append('email',this.email)
       formData.append('password',this.password)
       this.$store.dispatch('AuthModule/login',formData).then( res => {
-        console.log(res)
+        console.log('resssss',res)
       })
     }
   }

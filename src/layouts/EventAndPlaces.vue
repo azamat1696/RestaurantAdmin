@@ -43,19 +43,26 @@ const menuList = [
     separator: true,
     name:'events'
   },
-  {
-    id:2,
-    icon: 'update',
-    label: 'Müşteriler',
-    separator: true,
-    name:'Customers'
-  },
+  // {
+  //   id:2,
+  //   icon: 'update',
+  //   label: 'Müşteriler',
+  //   separator: true,
+  //   name:'Customers'
+  // },
   {
     id:3,
     icon: 'update',
     label: 'Kullanıcılar',
     separator: true,
     name:'Users'
+  },
+  {
+    id:4,
+    icon: 'update',
+    label: 'Rezervasyonlar',
+    separator: true,
+    name:'Reservations'
   },
 ]
 export default {

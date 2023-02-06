@@ -56,11 +56,11 @@
           <q-td class="text-center">
             {{ props.row.EventDescription.substring(1,30) }}
           </q-td>
-          <q-td>
-            <q-chip  square :color="+props.row.Status ===1 ? 'positive' :'negative'" text-color="white" :icon="+props.row.Status ===1 ?'done' : 'clear'" size="13px">
-              {{ (+props.row.Status === 1) ? 'Açık' :'Kapalı' }}
-            </q-chip>
-          </q-td>
+<!--          <q-td>-->
+<!--            <q-chip  square :color="+props.row.Status ===1 ? 'positive' :'negative'" text-color="white" :icon="+props.row.Status ===1 ?'done' : 'clear'" size="13px">-->
+<!--              {{ (+props.row.Status === 1) ? 'Açık' :'Kapalı' }}-->
+<!--            </q-chip>-->
+<!--          </q-td>-->
 <!--          <q-td class="text-center">-->
 <!--            {{ props.row.EndDateTime }}-->
 <!--          </q-td>-->
@@ -93,7 +93,7 @@ const eventColumns = [
   { name: 'EventName', align: 'center', label: 'Etkinlik Adı', field: 'EventName', sortable: true },
   { name: 'EventDescription', align: 'center', label: 'Açıklama', field: 'EventDescription', sortable: true },
   { name: 'guestCustomer', align: 'center', label: 'Kişi sayısı', field: 'guestCustomer', sortable: true },
-  { name: 'Status', align: 'center', label: 'Durumu', field: 'Status', sortable: true },
+  // { name: 'Status', align: 'center', label: 'Durumu', field: 'Status', sortable: true },
 
 ]
 
